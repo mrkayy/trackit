@@ -12,7 +12,7 @@ import 'package:trackit/data/services/mock_order_service.dart';
 
 void mainCommon(Map<String, dynamic> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
   //
   // Create an instance of ClientOptions with Ably key

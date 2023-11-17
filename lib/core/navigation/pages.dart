@@ -15,8 +15,10 @@ class Pages {
   Pages() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user != null) {
-        'User is currently signed out!'.logger;
+        'User is currently signed in!'.logger;
         _isLoggedIn = true;
+      } else {
+        'User is currently signed out!'.logger;
       }
     });
   }
@@ -49,6 +51,7 @@ class Pages {
       },
       bindings: [
         HomeScreenControllerBinding(),
+        SignupScreenControllerBinding(),
       ],
     ),
   ];
