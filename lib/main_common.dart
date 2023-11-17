@@ -1,11 +1,25 @@
+import 'package:ably_flutter/ably_flutter.dart' as alby;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/_http/mock/http_request_mock.dart';
 import 'package:trackit/core/localization/localization.dart';
 import 'package:trackit/core/navigation/pages.dart';
 import 'package:trackit/core/themes/theme.dart';
+import 'package:trackit/core/utils/debug_logger.dart';
+import 'package:trackit/data/services/mock_order_service.dart';
 
-void mainCommon() {
+void mainCommon(Map<String, dynamic> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  //
+  // Create an instance of ClientOptions with Ably key
+  final clientOptions = alby.ClientOptions(key: '<KEY>');
+  MockOrderService(clientOptions);
+
+  "$args".logger;
   runApp(const MyApp());
 }
 
@@ -25,7 +39,7 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale('en', 'US'),
         title: 'Trackit',
         theme: AppThemeData.lightTheme,
-        getPages:Pages.pages ,
+        getPages: Pages.pages,
       ),
     );
   }
